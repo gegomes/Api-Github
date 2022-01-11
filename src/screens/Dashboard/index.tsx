@@ -31,7 +31,13 @@ export function Dashboard() {
      * TODO: 
      * - call addRepository function sending inputText value;
      * - clean inputText value.
+     * 
      */
+    addRepository(inputText)
+    inputRef.current?.blur()
+    setInputText('')
+   
+
     inputRef.current?.blur();
   }
 
@@ -44,6 +50,11 @@ export function Dashboard() {
      *  repositoryId: id of the repository
      * })
      */
+
+     navigate('Repository', {
+      repositoryId: id
+    });
+
   }
 
   return (
@@ -62,6 +73,7 @@ export function Dashboard() {
                * changes:
                * onChangeText={YOUR CODE HERE}
                */
+              onChangeText={(value)=>setInputText(value)}
               onSubmitEditing={handleAddRepository}
               returnKeyType="send"
               autoCapitalize='none'
@@ -71,6 +83,7 @@ export function Dashboard() {
             <InputButton
               testID="input-button"
               onPress={handleAddRepository}
+              disabled={inputText? false : true}
             /**
              * TODO - ensure to disable button when inputText is 
              * empty (use disabled prop to this):

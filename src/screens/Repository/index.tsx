@@ -38,6 +38,7 @@ export function Repository() {
 
   function handleIssueNavigation(issueUrl: string) {
     // TODO - use Linking to open issueUrl in a browser
+    Linking.openURL(issueUrl)
   }
 
   return (
@@ -45,39 +46,62 @@ export function Repository() {
       <Container>
         <RepoInfo>
           {/* <OwnerAvatar source={{ uri:  }} /> */}
+          <OwnerAvatar source={{ uri:repository.owner.avatar_url }} />
 
           <TextGroup>
             <TitleAnimation>
+
+            {repository.full_name}
+
               {
                 // TODO - full name of the repository
               }
+
             </TitleAnimation>
 
-            <Description numberOfLines={2}>{
-              //TODO - repository description
-            }</Description>
+            <Description numberOfLines={2}>
+              {repository.description}
+              {
+               //TODO - repository description
+              }
+            </Description>
           </TextGroup>
         </RepoInfo>
 
         <RepoStats>
           <Stars>
-            <StarsCounter>{
+            <StarsCounter>
+            {repository.stargazers_count}
+              
+            {
               // TODO - repository stargazers count
-            }</StarsCounter>
+            }
+            </StarsCounter>
             <StarsText>Stars</StarsText>
           </Stars>
 
           <Forks>
-            <ForksCounter>{
+            <ForksCounter>
+            {repository.forks_count}
+
+            {
               // TODO - repository forks count
-            }</ForksCounter>
+            }
+
+            </ForksCounter>
             <ForksText>Forks</ForksText>
           </Forks>
 
           <OpenIssues>
-            <OpenIssuesCounter>{
+            <OpenIssuesCounter>
+
+            {repository.open_issues_count}
+           
+            {
               // TODO - repository issues count
-            }</OpenIssuesCounter>
+            }
+
+            </OpenIssuesCounter>
             <OpenIssuesText>Issues{'\n'}Abertas</OpenIssuesText>
           </OpenIssues>
         </RepoStats>
@@ -94,6 +118,8 @@ export function Repository() {
                 subTitle: issue.user.login,
               }}
             // TODO - onPress prop calling 
+
+            onPress={()=>handleIssueNavigation(issue.html_url)}
             />
           )}
         />
